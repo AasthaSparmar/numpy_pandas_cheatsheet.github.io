@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive NumPy & Pandas Cheat Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate & Amber -->
+    <!-- Application Structure Plan: A two-panel, tab-based layout. The left panel is a fixed sidebar for navigation, allowing users to switch between "NumPy" and "Pandas" sections and their respective sub-topics. The right panel dynamically displays the content for the selected topic. This structure was chosen to provide quick, non-linear access to specific information, which is ideal for a reference cheat sheet, eliminating the need for long scrolling and improving usability. -->
+    <!-- Visualization & Content Choices: Report Info: The cheat sheet contains code snippets, explanations, and outputs. Goal: To provide a quick and easy-to-use reference. Viz/Presentation Method: The information is presented in structured HTML sections with styled code blocks. Interaction: The primary interaction is the sidebar navigation, which toggles the visibility of content sections. A "Copy to Clipboard" button is added to each code block for practical utility. Justification: This approach turns a static document into an efficient interactive tool without needing complex visualizations like charts, which are irrelevant for this content. Library/Method: Vanilla JavaScript for all interactions, Tailwind CSS for styling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        .nav-link.active { background-color: #f59e0b; color: white; }
+        .nav-link:hover { background-color: #fde68a; }
+        .content-section { scroll-margin-top: 1rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-white border-r border-slate-200 p-6 sticky top-0 h-screen overflow-y-auto">
+            <h1 class="text-2xl font-bold text-slate-900 mb-6">Cheat Sheet</h1>
+            <nav id="navigation">
+                <!-- Navigation Links will be injected by JS -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+            <div id="main-content">
+                <!-- Intro Section -->
+                <section id="intro" class="content-section">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Interactive NumPy & Pandas Guide</h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Welcome to your interactive guide for NumPy and Pandas! This tool transforms the standard cheat sheet into a dynamic and easy-to-navigate resource. Use the menu on the left to jump directly to the topic you need, from creating NumPy arrays to manipulating Pandas DataFrames. Each code block includes a handy "Copy" button to streamline your workflow.
+                    </p>
+                    <div class="bg-amber-100 border-l-4 border-amber-500 text-amber-700 p-4 rounded-md">
+                        <p>Select a topic from the navigation panel to get started.</p>
+                    </div>
+                </section>
+                
+                <!-- NumPy Content -->
+                <section id="numpy-intro" class="content-section hidden">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">NumPy (Numerical Python)</h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        NumPy is the fundamental package for numerical computing in Python. It provides support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays efficiently. This section covers the essentials of creating, inspecting, and manipulating NumPy arrays.
+                    </p>
+                </section>
+                <section id="numpy-creation" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Array Creation</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">From a list</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">arr = np.array([1, 2, 3, 4, 5])
+# Creates a 1-dimensional NumPy array from a Python list.
+# Output: [1 2 3 4 5]</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Zeros / Ones / Empty</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">zeros_arr = np.zeros((3, 4))
+# Output:
+# [[0. 0. 0. 0.]
+#  [0. 0. 0. 0.]
+#  [0. 0. 0. 0.]]
+
+ones_arr = np.ones((2, 2))
+# Output:
+# [[1. 1.]
+#  [1. 1.]]
+
+empty_arr = np.empty((2, 3))
+# Creates an array with uninitialized data.</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Range / Linspace</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">range_arr = np.arange(0, 10, 2)
+# Creates an array with values from 0 up to (but not including) 10, with a step of 2.
+# Output: [0 2 4 6 8]
+
+lin_arr = np.linspace(0, 1, 5)
+# Creates an array with 5 evenly spaced numbers from 0 to 1 (inclusive).
+# Output: [0.   0.25 0.5  0.75 1.  ]</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Random</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">rand_int = np.random.randint(0, 10, size=(2, 3))
+# Creates a 2x3 array of random integers between 0 and 9.
+# Output: (will vary)
+
+rand_float = np.random.rand(2, 2)
+# Creates a 2x2 array of random floats between 0.0 and 1.0.
+# Output: (will vary)</pre></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="numpy-attributes" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Array Attributes</h3>
+                    <div class="space-y-2">
+                        <p><code class="bg-slate-200 text-sm p-1 rounded">arr.shape</code>: Returns a tuple with the dimensions of the array.</p>
+                        <p><code class="bg-slate-200 text-sm p-1 rounded">arr.ndim</code>: Returns the number of dimensions.</p>
+                        <p><code class="bg-slate-200 text-sm p-1 rounded">arr.size</code>: Returns the total number of elements.</p>
+                        <p><code class="bg-slate-200 text-sm p-1 rounded">arr.dtype</code>: Returns the data type of the elements.</p>
+                    </div>
+                </section>
+                <section id="numpy-indexing" class="content-section hidden">
+                     <h3 class="text-2xl font-semibold text-slate-800 mb-4">Indexing & Slicing</h3>
+                     <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">1D Array</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">arr = np.array([10, 20, 30, 40, 50])
+arr[0]      # Output: 10
+arr[1:4]    # Output: [20 30 40]
+arr[-1]     # Output: 50</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">2D Array</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">arr_2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+arr_2d[0, 1]    # Output: 2 (row 0, col 1)
+arr_2d[:, 1]    # Output: [2 5 8] (all rows, col 1)
+arr_2d[1:, :2]  # Output: [[4 5], [7 8]]</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Boolean Indexing</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">arr = np.array([1, 2, 3, 4, 5])
+arr[arr > 3] # Selects elements where the condition is True.
+# Output: [4 5]</pre></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="numpy-operations" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Basic Operations</h3>
+                     <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Arithmetic</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+a + b       # Output: [5 7 9]
+a * 2       # Output: [2 4 6]
+a * b       # Output: [ 4 10 18]</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Aggregation</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">arr = np.array([[1, 2], [3, 4]])
+arr.sum()       # Output: 10
+arr.sum(axis=0) # Output: [4 6] (sum along columns)
+arr.mean()      # Output: 2.5
+arr.max(axis=1) # Output: [2 4] (max along rows)</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Reshaping & Concatenation</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">arr = np.arange(1, 7)
+arr.reshape(2, 3)     # Reshapes to a 2x3 array.
+# Output:
+# [[1 2 3]
+#  [4 5 6]]
+
+a = np.array([1, 2])
+b = np.array([3, 4])
+np.concatenate((a, b)) # Joins arrays.
+# Output: [1 2 3 4]</pre></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pandas Content -->
+                <section id="pandas-intro" class="content-section hidden">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Pandas</h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Pandas is a powerful library for data manipulation and analysis. It introduces two primary data structures: the <strong>Series</strong> (1D) and the <strong>DataFrame</strong> (2D). Pandas is indispensable for tasks like cleaning messy data, merging datasets, and performing complex selections and aggregations. This section covers the core functionalities you'll use daily.
+                    </p>
+                </section>
+                <section id="pandas-structures" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Data Structures</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Series</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">s = pd.Series([1, 3, 5, np.nan, 6, 8])
+# A one-dimensional labeled array.
+# Output:
+# 0    1.0
+# 1    3.0
+# 2    5.0
+# 3    NaN
+# 4    6.0
+# 5    8.0
+# dtype: float64</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">DataFrame</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">data = {'col1': [1, 2, 3], 'col2': ['A', 'B', 'C']}
+df = pd.DataFrame(data)
+# A two-dimensional labeled data structure.
+# Output:
+#    col1 col2
+# 0     1    A
+# 1     2    B
+# 2     3    C</pre></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="pandas-viewing" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Viewing Data</h3>
+                    <div class="space-y-2">
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.head()</code>: View the first 5 rows.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.tail()</code>: View the last 5 rows.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.info()</code>: Get a concise summary of the DataFrame.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.describe()</code>: Generate descriptive statistics for numerical columns.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.shape</code>: Get the (rows, columns) tuple.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.columns</code>: Get the column labels.</p>
+                    </div>
+                </section>
+                <section id="pandas-selection" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Selection</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Column Selection</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df['col1']          # Selects a single column (returns a Series).
+df[['col1', 'col2']]  # Selects multiple columns (returns a DataFrame).</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Row Selection (by label - `loc`)</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df.loc[0]              # Selects row with label 0.
+df.loc[0:2, 'col1']    # Selects rows 0-2 (inclusive) for 'col1'.</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Row Selection (by position - `iloc`)</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df.iloc[0]             # Selects row at position 0.
+df.iloc[0:2, 0]        # Selects rows 0-1 (exclusive) for column at position 0.</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Conditional Selection</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df[df['col1'] > 2]
+df[(df['col1'] > 1) & (df['col2'] == 'B')]</pre></div>
+                        </div>
+                    </div>
+                </section>
+                 <section id="pandas-missing" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Handling Missing Data</h3>
+                    <div class="space-y-2">
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.isnull()</code>: Returns a boolean DataFrame indicating missing values.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.dropna()</code>: Drops rows with any missing values.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.fillna(value)</code>: Fills missing values with a specified value.</p>
+                         <p><code class="bg-slate-200 text-sm p-1 rounded">df.fillna(method='ffill')</code>: Forward-fills missing values.</p>
+                    </div>
+                </section>
+                <section id="pandas-manipulation" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Data Manipulation</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Adding/Modifying Columns</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df['new_col'] = df['col1'] * 2</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Applying Functions</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df['col1'].apply(lambda x: x * 10)</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Grouping (Group By)</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df.groupby('category_col')['value_col'].mean()</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Merging/Joining</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">pd.merge(df1, df2, on='key', how='inner')</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Concatenation</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">pd.concat([df1, df2], axis=0)</pre></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="pandas-io" class="content-section hidden">
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Input / Output</h3>
+                     <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">CSV</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df = pd.read_csv('file.csv')
+df.to_csv('output.csv', index=False)</pre></div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">Excel</h4>
+                            <div class="code-block mt-2"><pre class="bg-slate-100 p-4 rounded-lg text-sm">df = pd.read_excel('file.xlsx')
+df.to_excel('output.xlsx', index=False)</pre></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navigationData = {
+                "NumPy": [
+                    { id: 'numpy-intro', title: 'Introduction' },
+                    { id: 'numpy-creation', title: 'Array Creation' },
+                    { id: 'numpy-attributes', title: 'Array Attributes' },
+                    { id: 'numpy-indexing', title: 'Indexing & Slicing' },
+                    { id: 'numpy-operations', title: 'Basic Operations' }
+                ],
+                "Pandas": [
+                    { id: 'pandas-intro', title: 'Introduction' },
+                    { id: 'pandas-structures', title: 'Data Structures' },
+                    { id: 'pandas-viewing', title: 'Viewing Data' },
+                    { id: 'pandas-selection', title: 'Selection' },
+                    { id: 'pandas-missing', title: 'Handling Missing Data' },
+                    { id: 'pandas-manipulation', title: 'Data Manipulation' },
+                    { id: 'pandas-io', title: 'Input / Output' }
+                ]
+            };
+
+            const navigationContainer = document.getElementById('navigation');
+            const mainContent = document.getElementById('main-content');
+            const contentSections = mainContent.querySelectorAll('.content-section');
+
+            function showSection(id) {
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                const activeSection = document.getElementById(id);
+                if (activeSection) {
+                    activeSection.classList.remove('hidden');
+                    activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                const activeLink = document.querySelector(`.nav-link[data-target="${id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+
+            // Build navigation
+            Object.keys(navigationData).forEach(key => {
+                const group = document.createElement('div');
+                group.className = 'mb-6';
+                
+                const title = document.createElement('h3');
+                title.className = 'text-lg font-bold text-slate-900 mb-2';
+                title.textContent = key;
+                group.appendChild(title);
+
+                const list = document.createElement('ul');
+                list.className = 'space-y-1';
+                
+                navigationData[key].forEach(item => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `#${item.id}`;
+                    link.textContent = item.title;
+                    link.dataset.target = item.id;
+                    link.className = 'nav-link block w-full text-left px-3 py-2 rounded-md text-slate-600 font-medium transition-colors duration-150';
+                    
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showSection(item.id);
+                        // For mobile, you might want to close the nav here
+                    });
+                    
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+                
+                group.appendChild(list);
+                navigationContainer.appendChild(group);
+            });
+
+            // Add copy buttons to code blocks
+            document.querySelectorAll('.code-block').forEach(block => {
+                const pre = block.querySelector('pre');
+                const button = document.createElement('button');
+                button.textContent = 'Copy';
+                button.className = 'absolute top-2 right-2 bg-slate-300 hover:bg-slate-400 text-slate-800 text-xs font-semibold px-2 py-1 rounded';
+                block.style.position = 'relative';
+                block.appendChild(button);
+
+                button.addEventListener('click', () => {
+                    navigator.clipboard.writeText(pre.innerText).then(() => {
+                        button.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.textContent = 'Copy';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+                });
+            });
+
+            // Initial state
+            showSection('intro');
+        });
+    </script>
+</body>
+</html>
